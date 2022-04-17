@@ -1,0 +1,23 @@
+[
+    {
+      "id": "1",
+      "picture": "https://i.ibb.co/ThRkZjs/Plumbing-Services-1.png",
+      "name": "Checker",
+      "price": 118,
+      "description": "I will check your house for any kind of pipe or anything leak and give you better solution.\r\n"
+    },
+    {
+      "id": "2",
+      "picture": "https://i.ibb.co/MZRtFTg/plumber-service-2.png",
+      "name": "Repair",
+      "price": 232,
+      "description": "I will repair anything in your house as like your bathroom or kitchen water line and gas line.\r\n"
+    },
+    {
+      "id": "3",
+      "picture": "https://i.ibb.co/98FMHsR/plumber-service-1.png",
+      "name": "Installation",
+      "price": 493,
+      "description": "I can do your full house remodeling for plumbing as like bathroom or kitchen.\r\n"
+    }
+  ]
