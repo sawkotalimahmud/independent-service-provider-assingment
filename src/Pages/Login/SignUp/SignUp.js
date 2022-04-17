@@ -14,7 +14,7 @@ const SignUp = () => {
     const email = emailRef.current.value;
     const password =passwordRef.current.value;
 
-    console.log(name, email, password);
+    console.log(name,email,password);
 }
 
   const navigateLogin = (event) => {
@@ -126,7 +126,7 @@ const SignUp = () => {
             </div>
 
             <div>
-              <button
+              <button 
                 type="submit"
                 className="group relative w-full flex justify-center
                 py-2 px-4 border border-transparent text-sm font-medium
@@ -134,14 +134,15 @@ const SignUp = () => {
                 focus:outline-none focus:ring-2 focus:ring-offset-2
                 focus:ring-indigo-500"
               >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <LockClosedIcon
-                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  />
-                </span>
                 Sign in
               </button>
+              <button className="w-full mt-2
+                py-2 px-4 border border-transparent text-sm font-medium
+                rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+                focus:ring-indigo-500">
+                  Sign Up With Google
+                </button>
             </div>
           </form>
         </div>
