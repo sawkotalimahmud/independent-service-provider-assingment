@@ -5,7 +5,7 @@ const Service = ({ service }) => {
   const {id, name, picture, price, description } = service;
 
   const navigate = useNavigate();
-  const serviceDetailBtn = id =>{
+  const serviceDetailBtn = () =>{
     navigate(`/service/${name}`)
   }
   
@@ -23,7 +23,7 @@ const Service = ({ service }) => {
           <h3>Price: ${price}</h3>
           <p>{description}</p>
           <div className="card-actions justify-end">
-            <button onClick={()=>serviceDetailBtn(id)} className="btn btn-black">Book Now</button>
+            <button onClick={()=>serviceDetailBtn()} className="btn btn-black">Book Now</button>
           </div>
         </div>
       </div>
