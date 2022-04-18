@@ -8,6 +8,7 @@ const Service = ({ service }) => {
   const serviceDetailBtn = id =>{
     navigate(`/service/${name}`)
   }
+  
   return (
     <div>
       <div className="card card-compact w-100% h-auto bg-base-100 shadow-xl">
