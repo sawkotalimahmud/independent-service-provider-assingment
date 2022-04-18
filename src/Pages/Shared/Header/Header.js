@@ -16,7 +16,7 @@ const Header = () => {
             <nav className='gap-5 text-2xl font-medium	m-4'>
             <CustomLink to="/">Plumber David</CustomLink>
             </nav>
-            <nav className='flex justify-center gap-5 text-2xl font-medium	m-4'>
+            <nav className='flex justify-center gap-3 text-2xl font-medium	m-4'>
                 <CustomLink to="/">Home</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
                 <CustomLink to="/blog">Blog</CustomLink>
