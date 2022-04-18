@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from "../../../firebase.init";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
 
@@ -145,15 +146,9 @@ if(user){
                 focus:outline-none focus:ring-2 focus:ring-offset-2
                 focus:ring-indigo-500"
               >
-                Sign in
+                Sign Up
               </button>
-              <button className="w-full mt-2
-                py-2 px-4 border border-transparent text-sm font-medium
-                rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                focus:outline-none focus:ring-2 focus:ring-offset-2
-                focus:ring-indigo-500">
-                  Sign Up With Google
-                </button>
+              <SocialLogin></SocialLogin>
             </div>
           </form>
         </div>

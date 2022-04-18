@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const [
@@ -135,18 +136,12 @@ const Login = () => {
                 focus:outline-none focus:ring-2 focus:ring-offset-2
                 focus:ring-indigo-500"
                 >
-                  
                   Sign in
                 </button>
-                <button className="w-full mt-2
-                py-2 px-4 border border-transparent text-sm font-medium
-                rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                focus:outline-none focus:ring-2 focus:ring-offset-2
-                focus:ring-indigo-500">
-                  Login With Google
-                </button>
+                <SocialLogin></SocialLogin>
               </div>
             </form>
+            
           </div>
         </div>
       </div>
