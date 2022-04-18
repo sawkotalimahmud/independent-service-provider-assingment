@@ -7,6 +7,7 @@ import {
 import auth from "../../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { async } from "@firebase/util";
+import Loading from "../../Shared/Loading/Loading";
 
 const SignUp = () => {
   const [agree, setAgree] = useState(false);
@@ -15,6 +16,9 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  if(loading || updating){
+    <Loading></Loading>
+  }
   let errorElement;
   if (error) {
     errorElement = (

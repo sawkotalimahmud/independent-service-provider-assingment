@@ -1,8 +1,14 @@
 import React, { useRef } from "react";
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -41,12 +47,20 @@ const Login = () => {
 
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
-  const passwordReset = async()=>{
+  const passwordReset = async () => {
     const email = emailRef.current.value;
-    await sendPasswordResetEmail(email);
-          alert('Sent email');
-  }
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Sent email");
+    }
+    else{
+      toast('Please Enter Your Email Address')
+    }
+  };
 
+  if (loading || sending) {
+    <Loading></Loading>;
+  }
   return (
     <div>
       <div>
@@ -138,7 +152,8 @@ const Login = () => {
                 </div>
 
                 <div className="text-sm">
-                  <a onClick={passwordReset}
+                  <a
+                    onClick={passwordReset}
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
@@ -160,6 +175,7 @@ const Login = () => {
                 </button>
                 {errorElement}
                 <SocialLogin></SocialLogin>
+                <ToastContainer />
               </div>
             </form>
           </div>

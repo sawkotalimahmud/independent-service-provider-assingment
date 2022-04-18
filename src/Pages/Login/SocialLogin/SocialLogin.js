@@ -5,6 +5,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 
 const SocialLogin = () => {
   const [signInWithGithub, user, loading, error] = useSignInWithGithub(auth);
@@ -22,6 +23,9 @@ const SocialLogin = () => {
     );
   }
 
+  if(loading||loading1){
+      return <Loading></Loading>
+  }
   if (user || user1) {
     navigate("/serviceId");
   }
