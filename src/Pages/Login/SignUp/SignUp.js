@@ -41,7 +41,7 @@ const SignUp = () => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
     console.log("Updated profile");
-    navigate("/service");
+    navigate("/service/serviceId");
 
     console.log(email, password);
   };

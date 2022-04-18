@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   if (user) {
-    navigate("/servicedetail");
+    navigate("/service/serviceId");
   }
 
   const navigateSingUp = (event) => {

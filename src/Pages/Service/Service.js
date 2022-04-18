@@ -6,7 +6,7 @@ const Service = ({ service }) => {
 
   const navigate = useNavigate();
   const serviceDetailBtn = id =>{
-    navigate(`/service/${id}`)
+    navigate(`/service/${name}`)
   }
   
   return (
