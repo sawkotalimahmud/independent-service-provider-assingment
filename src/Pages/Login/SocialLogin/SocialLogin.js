@@ -27,7 +27,7 @@ const SocialLogin = () => {
       return <Loading></Loading>
   }
   if (user || user1) {
-    navigate("/serviceId");
+    navigate("/service/serviceId");
   }
 
   return (
