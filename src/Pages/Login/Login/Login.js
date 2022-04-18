@@ -1,36 +1,50 @@
 import React, { useRef } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  let errorElement;
+  if (error) {
+    errorElement = (
+      <div>
+        <p className="text-red-500">Error: {error?.message}</p>
+      </div>
+    );
+  }
+
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigate = useNavigate();
 
-  const handleSubmit = event =>{
-      event.preventDefault();
-      const email = emailRef.current.value;
-      const password =passwordRef.current.value;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
-      signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(email, password);
 
-      console.log(email, password);
+    console.log(email, password);
+  };
+
+  if (user) {
+    navigate("/servicedetail");
   }
 
-  if(user){
-    navigate('/home')
-  }
+  const navigateSingUp = (event) => {
+    navigate("/signup");
+  };
 
-  const navigateSingUp = event=>{
-      navigate('/signup')
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+  const passwordReset = async()=>{
+    const email = emailRef.current.value;
+    await sendPasswordResetEmail(email);
+          alert('Sent email');
   }
 
   return (
@@ -49,7 +63,8 @@ const Login = () => {
               </h2>
               <p className="mt-2 text-center text-sm text-gray-600">
                 {" "}
-                <Link to="/signup"
+                <Link
+                  to="/signup"
                   onClick={navigateSingUp}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -57,7 +72,12 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 space-y-6"
+              action="#"
+              method="POST"
+            >
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -118,7 +138,7 @@ const Login = () => {
                 </div>
 
                 <div className="text-sm">
-                  <a
+                  <a onClick={passwordReset}
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
@@ -138,10 +158,10 @@ const Login = () => {
                 >
                   Sign in
                 </button>
+                {errorElement}
                 <SocialLogin></SocialLogin>
               </div>
             </form>
-            
           </div>
         </div>
       </div>

@@ -1,35 +1,44 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
+  const [agree, setAgree] = useState(false);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, error1] = useUpdateProfile(auth);
+
+  let errorElement;
+  if (error) {
+    errorElement = (
+      <div>
+        <p className="text-red-500">Error: {error?.message}</p>
+      </div>
+    );
+  }
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigate = useNavigate();
 
-  const handleSubmit = event =>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
-    const password =passwordRef.current.value;
+    const password = passwordRef.current.value;
 
-    createUserWithEmailAndPassword(email, password)
+    if (agree) {
+      createUserWithEmailAndPassword(email, password);
+    }
 
-    console.log(email,password);
-}
+    console.log(email, password);
+  };
 
-if(user){
-  navigate('/home')
-}
+  if (user) {
+    navigate("/service");
+  }
 
   const navigateLogin = (event) => {
     navigate("/login");
@@ -59,7 +68,12 @@ if(user){
               </Link>
             </p>
           </div>
-          <form onClick={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            action="#"
+            method="POST"
+          >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -67,7 +81,6 @@ if(user){
                   Your Name
                 </label>
                 <input
-                  
                   id="your-name"
                   name="name"
                   type="text"
@@ -122,23 +135,29 @@ if(user){
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
-                  id="remember-me"
-                  name="remember-me"
+                  onClick={() => setAgree(!agree)}
+                  id="terms"
+                  name="terms"
                   type="checkbox"
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500
                   border-gray-300 rounded"
                 />
                 <label
                   htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
+                  className={
+                    agree
+                      ? "ml-2 block text-sm text-gray-900"
+                      : "ml-2 block text-sm text-red-500"
+                  }
                 >
-                  Remember me
+                  Accept terms and conditions
                 </label>
               </div>
             </div>
 
             <div>
-              <button 
+              <button
+                disabled={!agree}
                 type="submit"
                 className="group relative w-full flex justify-center
                 py-2 px-4 border border-transparent text-sm font-medium
@@ -148,6 +167,7 @@ if(user){
               >
                 Sign Up
               </button>
+              {errorElement}
               <SocialLogin></SocialLogin>
             </div>
           </form>

@@ -6,7 +6,7 @@ const Service = ({ service }) => {
 
   const navigate = useNavigate();
   const serviceDetailBtn = id =>{
-    navigate(`/service/${name}`)
+    navigate(`/service/${id}`)
   }
   
   return (
@@ -23,7 +23,7 @@ const Service = ({ service }) => {
           <h3>Price: ${price}</h3>
           <p>{description}</p>
           <div className="card-actions justify-end">
-            <button onClick={()=>serviceDetailBtn(name)} className="btn btn-black">Book Now</button>
+            <button onClick={()=>serviceDetailBtn(id)} className="btn btn-black">Book Now</button>
           </div>
         </div>
       </div>
