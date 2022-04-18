@@ -1,4 +1,3 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
